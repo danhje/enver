@@ -1,0 +1,10 @@
+include:
+  - project: 'stas/gitlab-ci/python-build'
+    ref: v1beta1
+    file: 'python-package.yml'
+
+variables:
+  PKG_NAME: "enver"
+  PROJECT_NAME: "enver"
+  PYTHON_VERSIONS: "/(3.8)/"
+  PYTHON_PUBLISH_VERSION: "3.8"

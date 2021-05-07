@@ -1,0 +1,12 @@
+enver:
+  MY_DB_HOST: '127.0.0.1'
+  MY_DB_USER: 'user'
+  MY_DB_PASS:
+  ANOTHER_SECRET: ''
+  case_shouldn't_matter: 1
+  NON_STRING: true
+  ANOTHER_NON_STRING: [1, 2, 3]
+  OVERRIDE_THIS_FLOAT: 3.14
+
+other_block_collection_to_ignore:
+  other_data: 42
