@@ -1,20 +1,11 @@
 """Enver is a simple config / environment helper.
 
 Features:
-- Enforces listing all variables in a single file, so new contributors knows what variables must be
-  set, and the don't have to go searching for "os.environ" lookups scattered throughout the code.
-- Default values can be set in the config file, or left blank.
-- Immediately warns if a variable has no value (either default or override).
-- Allows lookup using dot notation, e.g. env.MY_DB_PASS, as well as using subscript or get().
-- Case insensitive, i.e. env.my_db_pass == env.MY_DB_PASS.
-
-Use the Enver class to instantiate enver.
-
-Example:
-
-    from enver import Enver
-    env = Enver("config.yml")
-    password = env.MY_DB_PASS
+- Automatic validation of environment variables.
+- Automatic casting to desired data type using Pydantic.
+- Optional default values.
+- Fails fast if a variable has no value (either default or override).
+- Allows lookup using dot notation, e.g. env.DB_PASSWORD, as well as subscript and the get() method.
 """
 
 from typing import Any
@@ -46,17 +37,28 @@ class Enver(BaseSettings, metaclass=Singleton):
     Create a subclass of this class with typed attributes, and optionally, default values. If
     environment variables with the same name exists, these will override the defaults values.
 
+    Putting your Enver subclass in a separate config.py file might be a good idea, but not
+    mandatory.
+
     Example:
 
-         >>> class Config(Enver):
-         ...     MY_DB_HOST: str = "127.0.0.1"
-         ...     MY_DB_PORT: int = 2700
-         ...     MY_DB_USER: str = "admin"
-         ...     MY_DB_PASSWORD: str  # No default, this secret will be read from the environment.
+        >>> from enver import Enver
+        ... from typing import Optional, List, Dict
+        ...
+        ... class Config(Enver):
+            ... MY_DB_HOST: str = "127.0.0.1"
+            ... MY_DB_USER: str = "user"
+            ... MY_DB_PASSWORD: str  # No default value, will be supplied as environment value.
+            ... OPTIONAL: Optional[str]
+            ... PI: float  # Read from env and converted to float, if possible.
+            ... LOCATIONS: List[str] = ["/opt", "/etc"]
+            ... MAPPING: Dict[str, float]
 
         >>> conf = Config()
         >>> conf.MY_DB_HOST
         "127.0.0.1"
+        >>> conf.MY_DB_PASSWORD
+        "changeit"
 
     There are three ways to access values, and these are exactly equivalent:
         conf.MY_DB_PASS
