@@ -7,7 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Install prerequisites
+      run: |
+        pip install poetry-dynamic-versioning
     - name: Build and publish to pypi
-      uses: JRubics/poetry-publish@v1
+      uses: JRubics/poetry-publish@v1.7
       with:
         pypi_token: ${{ secrets.PYPI_TOKEN }}
