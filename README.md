@@ -7,7 +7,7 @@ Enver is a simple config / environment helper.
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/danhje/enver?include_prereleases)
 ![PyPI](https://img.shields.io/pypi/v/enver)
 
-Collect all your config values and environment values in a single location, so new contributors knows what variables must be
+Collect all your config values and environment variables in a single location, so new contributors knows what variables must be
   set, and don't have to go searching for `os.environ` or `os.getenv` scattered throughout the code.
 
 Features:
@@ -25,7 +25,7 @@ pip install enver
 
 ## Usage
 
-Create a class that inherits from Enver, with config variables as class attributes. Putting this class in a separate config.py file might be a good idea, but not necessary.
+Create a class that inherits from Enver, with config variables as class attributes. Putting this class in a separate config.py file might be a good idea, but is not necessary.
 
 
 ```python
@@ -65,7 +65,7 @@ if env.exists('FEATURE_1'):
 all_values = env.all()
 ```
 
-The `Enver` class and any derived classes are singletons, meaning it they always return the same instance:
+The `Enver` class and any derived classes are singletons, meaning they always return the same instance:
 
 ```python
 env1 = Config()
