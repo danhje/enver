@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "enver"
-version = "0.0.1"  # Placeholder. Version will be set by poetry-dynamic-versioning.
+version = "0.2.0"
 description = "Organize your config and environment variables"
 readme = "README.md"
 authors = ["Daniel Hjertholm <daniel.hjertholm@icloud.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.8, <4.0"
 pydantic = "^1.8.2"
 
 [tool.poetry.dev-dependencies]
